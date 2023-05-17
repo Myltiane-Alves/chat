@@ -3,6 +3,7 @@ import './App.css'
 import Home from './pages/Home'
 
 import Login from './pages/Login'
+import MainRoutes from './routes'
 
 
 
@@ -13,8 +14,7 @@ function App() {
   return (
   
       <div className="App">
-       {/* <Home /> */}
-       <Login />
+        <MainRoutes />
         
       </div>
   )
