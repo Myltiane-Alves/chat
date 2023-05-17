@@ -5,7 +5,13 @@ import { addUser } from "../../store/user";
 export default function Login() {
     const [document, setDocument] = useState("");
     const [password, setPassword] = useState("");
+    const [data, setData] = useState(initialState);
 
+    const initialState = {
+        document: "",
+        password: "",
+    
+    }
     function handleSubmit(e) {
         e.preventDefaut()
 
@@ -28,14 +34,14 @@ export default function Login() {
                         type="text"
                         placeholder='Digite seu cpf'
                         handleChange={setDocument}
-                        value={document}
+                        value={data.document}
                     />
                 </div>
                 <div className="inputArea">
                     <input
                         type="password"
                         placeholder='Digite sua  senha'
-                        value={password}
+                        value={data.password}
                     />
                 </div>
                 <div className="inputArea">
