@@ -4,12 +4,12 @@
 	box-sizing:border-box;
 }
 body{
-
+  background-color: #052140;
 	font-family:Arial;
 }
 
-div, aside {
-  display: block;
+div, aside, header, section, footer {
+  display: flex;
 }
 
 .App {

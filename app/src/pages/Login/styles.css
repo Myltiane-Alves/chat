@@ -1,11 +1,11 @@
-.container-login {
+/* .container-login {
     background-color: #154452;
     padding: 50px 24px;
     flex-direction: column;
 }
 
 header {
-   
+    flex-direction: column;
     font-style: normal;
     font-weight: 400;
     font-size: 36px;
@@ -88,4 +88,4 @@ button {
 
 .signupArea {
     margin-top: 62px;
-}
+} */

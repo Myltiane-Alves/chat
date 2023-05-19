@@ -27,6 +27,7 @@
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.2",
     "socket.io-client": "^4.6.1",
+    "styled-components": "^6.0.0-rc.1",
     "use-socket.io-client": "^1.1.0"
   },
   "devDependencies": {

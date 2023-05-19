@@ -1,90 +1,59 @@
 import React, { useState } from "react";
+import * as S from "./styles";
 import "./styles.css";
-import { logIn } from "../../store/actions/authAction.js";
-import { useDispatch, useSelector } from "react-redux";
 import { useForm } from 'react-hook-form';
 
+
+
 const Login = () => {
- 
-    const [data, setData] = useState({
-        password: "",
-        document: "",
-    });
     const { register, handleSubmit, formState: { errors } } = useForm();
-    // const [document, setDocument] = useState("");
-    // const [password, setPassword] = useState("");
-    const loading = useSelector((state) => state.authReducer.loading);
-    const dispatch = useDispatch();
-
-    const resetForm = () => {
-        setData(initialState);
-
-    };
-
-    const handeChange = (e) => {
-        setData({ ...data, [e.target.document]: e.target.value });
-    };
-
-    function onSubmit(e) {
-        e.preventDefaut()
-        dispatch(logIn(data))
-    }
-
+    const [document, setDocument] = useState("");
+    const [password, setPassword] = useState("");
 
     return (
-        <div className="container-login">
+        <S.Container>
+            <form className="formArea" onSubmit>
+                <header className="brand">
+                    <img src="/img/chat2.png" alt="" />"
+                    <h1>Faça seu Login</h1>
 
-
-            <form className="formArea" onSubmit={handleSubmit(onSubmit)}>
-                <header>
-                    <h2>Login</h2>
                 </header>
 
                 <div className="inputArea">
-              
+
                     <input
                         type="text"
                         placeholder='Digite seu cpf'
                         name="document"
-                        value={data.document}
-                        {...register("document", { 
+                        value={document}
+                        {...register("document", {
                             required: true, maxLength: 80,
                             onChange: (e) => handeChange(e)
-                         })} 
-                     
-                        // onChange={handeChange}
+                        })}
+
+                    // onChange={handeChange}
                     />
                 </div>
                 <div className="inputArea">
                     <input
                         type="password"
                         placeholder='Digite sua  senha'
-                        value={data.password}
+                        value={password}
                         {...register("password", {
-                            
-                            onChange:  (e) => handeChange(e)
+
+                            onChange: (e) => handeChange(e)
                         })}
                     />
                 </div>
                 <div className="inputArea">
-                    <button
-                        type="submit"
-                        label='Entrar'
-
-                    >Entrar</button>
+                    <button type="submit" label='Entrar'>Entrar</button>
                 </div>
+                <span>
+                    Ainda não tem uma conta? <a href="/register">Cadastra-se</a>
+                </span>
             </form>
 
-            <p
-                className="forgetArea"
-
-            >
-                Esqueceu sua senha? <a href="" >Clique Aqui</a>
-            </p>
-
-
-
-        </div>
+        </S.Container>
     );
 }
 
