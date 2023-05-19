@@ -1,9 +1,9 @@
 import React from "react";
 
 import "./Home.css";
-import Aside from "../components/aside";
-import Main from "../components/main";
-const Home = () => {
+import Aside from "../../components/aside";
+import Main from "../../components/main";
+const Chat = () => {
   return (
     <div className="container">
 
@@ -14,4 +14,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Chat;
