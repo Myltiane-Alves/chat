@@ -17,11 +17,12 @@ export const Container = styled.section`
       align-items: center;
       gap: 1rem;
       justify-content: center;
+      
       img {
-        height: 10rem;
+        height: 8rem;
       }
       h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
         color: white;
         text-transform: uppercase;
       }
@@ -31,16 +32,19 @@ export const Container = styled.section`
     gap: 2rem;
     background-color: #00152C;
     border-radius: 2rem;
-    padding: 3rem 2rem;
+    padding: 2rem 2rem;
     .inputArea {
       flex-direction: column;
+      align-items: center;
       input {
         background-color: transparent;
-        padding: 1rem;
+        padding-left: 1rem;
         border: 0.1rem solid #092749;
         border-radius: 0.4rem;
         color: #BDBDBD;
         width: 100%;
+        height: 50px;
+        max-width: 300px;
         font-size: 1rem;
         &:focus {
           border: 0.1rem solid #02CCC0;
@@ -48,17 +52,21 @@ export const Container = styled.section`
         }
       }
       button {
-        background-color: #57B5FD;
+        background-color: #092749;
         color: #BDBDBD;
-        padding: 1rem 2rem;
+        /* padding: 1rem 2rem; */
         border: none;
         font-weight: bold;
         cursor: pointer;
         border-radius: 0.4rem;
         font-size: 1rem;
         text-transform: uppercase;
+        width: 100%;
+        height: 50px;
+        max-width: 300px;
         &:hover {
-          background-color: #02CCC0;
+          background-color: #052140;
+          transition: all  0.5s ease-in-out;
         }
       }
     }
