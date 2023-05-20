@@ -8,7 +8,7 @@ export const Container = styled.header`
   flex-direction: column;
   text-align: center;
   position: relative;
-  /* background-color: aliceblue; */
+  background-color: #052140;
   .logoutButton {
     position: absolute;
     right: 1.5rem;

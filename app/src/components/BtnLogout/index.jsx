@@ -1,4 +1,4 @@
-import React from "react";
+
 import * as S from "./styles";
 import { useNavigate } from "react-router-dom";
 import { MdLogout } from "react-icons/md";

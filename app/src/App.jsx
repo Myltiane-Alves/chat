@@ -1,21 +1,20 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css'
 import Chat from './pages/Chat';
-// import Login from './pages/Login';
-// import Register from './pages/Register';
-
-
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 function App() {
-
-
   return (
-
-    < >
-
-      {/* <Login /> */}
-      {/* <Register /> */}
-      <Chat />
-    </>
+    <BrowserRouter>
+        <Routes>
+            <Route path="/register" element={<Register />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/chat" element={<Chat />} />
+        </Routes>
+     
+  
+    </ BrowserRouter>
   )
 }
 
