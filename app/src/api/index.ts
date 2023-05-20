@@ -28,4 +28,11 @@ const API = axios.create({
 export const login = (formData: {
     password: string;
     document: string;
-}): Promise<AxiosResponse<ILogin>> => API.post("/api/auth/login", formData); 
+}): Promise<AxiosResponse<ILogin>> => API.post("/api/auth/login", formData);
+
+export const signUp = (formData:{
+    password: string;
+    cpf: string;
+    username: string;
+    email: string;
+}) => API.post("/api/auth/register", formData);
