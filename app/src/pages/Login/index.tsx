@@ -13,7 +13,7 @@ const Login = () => {
     // const [document, setDocument] = useState("");
     // const [password, setPassword] = useState("");
     const [values, setValues] = useState({
-        document: "",
+       cpf: "",
         password: "",
       });
     const navigate = useNavigate();
@@ -36,10 +36,10 @@ const Login = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if(handleValidation()) {
-            let { password, document  } = values;
+            let { password, cpf  } = values;
 
             try {
-                const { data } = await login({password, document}) 
+                const { data } = await login({password, cpf}) 
                 if (data.status === false) {
                     toast.error(data.msg, toastOptions);
                   }
@@ -57,11 +57,11 @@ const Login = () => {
     }
 
     const handleValidation = () => {
-        const { password, document} = values;
+        const { password, cpf} = values;
         if(password === "") {
             toast.error("CPF e senha são obrigatários", toastOptions)
             return false;
-        } else if(document === "") {
+        } else if(cpf === "") {
             toast.error("CPF e senha são obrigatários", toastOptions)
             return false;
         }
@@ -85,25 +85,14 @@ const Login = () => {
                     <input
                         type="text"
                         placeholder='Digite seu cpf'
-                  
-                      
-                        // {...register("document", {
-                        //     required: true, maxLength: 80,
-                        // })}
-                        // onChange:(e) => setValues({...values, document: e.target.value})
-
-                    // onChange={handeChange}
+                        onChange={(e) => setValues({...values,cpf: e.target.value})}
                     />
                 </div>
                 <div className="inputArea">
                     <input
                         type="password"
                         placeholder='Digite sua  senha'
-                    
-                        // {...register("password", {
-
-                            // onChange: (e) => setValues({...values, password: e.target.value})
-                        // })}
+                        onChange={(e) => setValues({...values, password: e.target.value})}
                     />
                 </div>
                 <div className="inputArea">

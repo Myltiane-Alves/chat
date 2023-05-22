@@ -10,7 +10,7 @@ const messageSchema = new mongoose.Schema({
     users: Array,
     sender: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "ChatUser",
+        ref: "ChatUsers",
         required: true,
     },
     image: {

@@ -1,13 +1,21 @@
 import { Schema, model } from "mongoose";
-import { ChatUser } from "../interfaces/ChatUser";
+
+interface ChatUser {
+    username: string;
+    cpf: string;
+    email: string;
+    password: string;
+    isAvatarSet: boolean;
+    avatarImg: string;
+}
 
 const userSchema = new Schema<ChatUser>({
     username: {
         type: String,
         required: true,
         min: 4,
+        unique: true,
         max: 20,
-        unique: true
     },
     cpf: {
         type: String,
@@ -35,4 +43,4 @@ const userSchema = new Schema<ChatUser>({
     },
 })
 
-export default model("ChatUser", userSchema, "users")
+export default model("ChatUsers", userSchema, "users")
