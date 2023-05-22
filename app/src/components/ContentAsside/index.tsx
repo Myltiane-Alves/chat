@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import * as S from './styles';
 import { useNavigate } from 'react-router';
 import { User } from '../../interfaces/user';
-// import defaultAvatar from "../../img/DefaultAvatar.png";
-import defaultAvatar from "../../img/DefaultAvatar.png";
+import defaultAvatar from "../../img/chat.png";
+import cameraImage from "../../img/camera.png";
 
 interface ContactsProps  {
     contacts: any;
@@ -12,7 +12,7 @@ interface ContactsProps  {
 }
 
 const AsideContent: React.FC<ContactsProps> = ({contacts, currentUser, changeChat}) => {
-    const [currentChat, setCurrentChat] = useState("");
+   
     const [currentUserName, setCurrentUserName] = useState("");
     const [currentUserImage, setCurrentUserImage] = useState("");
     const [currentSelected, setCurrentSelected] = useState("");
@@ -55,9 +55,10 @@ const AsideContent: React.FC<ContactsProps> = ({contacts, currentUser, changeCha
                         >
                             <div className="avatar">
                                 <img src={contact.avatarImage || defaultAvatar} alt="avatar do usuário" />
+                                {/* <img src="/img/DefaultAvatar.png" alt="avatar do usuário" /> */}
                             </div>
                             <div className="username">
-                                <h3>Myltiane</h3>
+                                <h3>{contact.username}</h3>
                             </div>
                         </div>
 
@@ -65,14 +66,21 @@ const AsideContent: React.FC<ContactsProps> = ({contacts, currentUser, changeCha
                 })}
             </div>
             <div className="current-user">
-                <div className="avatar">
-                    <img src="/img/defaultAvatar.png" alt="avatar" />
-                    <div className="camera-img">
-                        {/* <img src="/img/defaultAvatar.png" alt="avatar" /> */}
-                    </div>
+                <div 
+                    className="avatar"
+                    onMouseEnter={() => setShowEditButton(true)}
+                    onMouseLeave={() => setShowEditButton(false)}
+                >
+                    <img src={currentUserImage || defaultAvatar} alt="avatar" />
+                    {showEditButton && ( 
+                        <div className="camera-img" onClick={handleEditButton}>
+                            <img src={cameraImage} alt="icone de camera" />
+                        </div>
+                    )}
+
                 </div>
                 <div className="username">
-                    <h2>Myltiane</h2>
+                    <h2>{currentUserName}</h2>
                 </div>
             </div>
         </S.Container>
