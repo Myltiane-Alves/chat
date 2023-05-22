@@ -1,6 +1,7 @@
+import React from 'react';
+import * as S from './styles';
 import Logout from '../BtnLogout';
 import ChatInput from '../ChatInput';
-import * as S from './styles';
 import { User } from '../../interfaces/user';
 import { useEffect, useRef, useState } from 'react';
 import { Message } from '../../interfaces/message';

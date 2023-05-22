@@ -1,0 +1,28 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing:border-box;
+  scroll-behavior: smooth;
+}
+body {
+
+  box-sizing:border-box;
+  scroll-behavior: smooth;
+  background-color: #052140;
+}
+
+div, sidebar, header {
+  display: flex;
+}
+h1 {
+  font-size: 2rem;
+  line-height: 1.1;
+}
+

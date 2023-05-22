@@ -71,7 +71,7 @@ const Login = () => {
     return (
         <S.Container>
             <div className="login-img">
-                <img src="/img/chat-login.png" alt="" />
+                <img src="/img/chat-login.png" alt="ilustração de um chat" />
             </div>
             <form className="formArea" onSubmit={(e) => handleSubmit(e)} >
                 <header className="brand">
