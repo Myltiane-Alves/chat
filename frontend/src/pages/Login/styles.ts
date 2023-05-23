@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.section`
+export const FormContainer = styled.section`
   min-height: 100vh;
   width: 100%;
   display: flex;
@@ -32,8 +32,7 @@ export const Container = styled.section`
     background-color: #00152C;
     border-radius: 2rem;
     padding: 3rem 2rem;
-    .inputArea {
-      flex-direction: column;
+ 
       input {
         background-color: transparent;
         padding: 1rem;
@@ -49,7 +48,7 @@ export const Container = styled.section`
       }
       button {
         background-color: #57B5FD;
-        color: #BDBDBD;
+        color: #ffffff;
         padding: 1rem 2rem;
         border: none;
         font-weight: bold;
@@ -61,7 +60,7 @@ export const Container = styled.section`
           background-color: #02CCC0;
         }
       }
-    }
+    
     span {
       color: #ffffff;
       text-transform: uppercase;

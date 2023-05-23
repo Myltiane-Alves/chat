@@ -103,7 +103,7 @@ export const Container = styled.div`
       }
     }
   }
-  .imageSend {
+  .image-send {
     .addImageBtn {
       color: white;
       background: transparent;

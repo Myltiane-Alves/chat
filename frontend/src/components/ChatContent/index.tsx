@@ -1,113 +1,116 @@
-import React from 'react';
-import * as S from './styles';
-import Logout from '../BtnLogout';
-import ChatInput from '../ChatInput';
-import { User } from '../../interfaces/user';
-import { useEffect, useRef, useState } from 'react';
-import { Message } from '../../interfaces/message';
-import { getAllMessages, sendMessage } from '../../api';
-import loading from "../../img/chat2.png"
+import React, { useEffect, useRef, useState } from "react";
+import * as S from "./styles"
+import { getAllMessages, sendMessage } from "../../api";
+import ChatInput from "../ChatInput";
+import Logout from "../BtnLogout";
+import { Message, User } from "../../interfaces";
+import { v4 as uuidv4 } from "uuid";
+import loading from "../../assets/loader.gif";
 
-interface ChatContentProps {
-    currentChat: any;
-    currentUser: User | undefined;
-    socket: any;
+interface ChatContainerProps {
+  currentChat: any;
+  currentUser: User | undefined;
+  socket: any;
 }
 
-const ChatContent: React.FC<ChatContentProps> = ({
-    currentChat,
-    currentUser,
-    socket
+const ChatContainer: React.FC<ChatContainerProps> = ({
+  currentChat,
+  currentUser,
+  socket,
 }) => {
-    const [messages, setMessages] = useState<Message[]>([]);
-    const [arrivalMessage, setArrivalMessage] = useState<Message>();
-    const [isLoading, setIsLoading] = useState(true);
-    const scrollRef = useRef<HTMLDivElement>(null)
-    
-    useEffect(() => {
-        const getMsg = async () => {
-            if(currentChat && currentUser) {
-                const response = await getAllMessages(currentUser._id, currentChat._id);
-                setMessages(response.data)
-            }
-            setIsLoading(false);
-        };
-        getMsg();
-    }, [currentChat, currentChat._id, currentUser]);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [arrivalMessage, setArrivalMessage] = useState<Message>();
+  const [isLoading, setIsLoading] = useState(true);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        if(socket.current) {
-            socket.current.on("msg-recieve", (msg: string) => {
-                setArrivalMessage({ fromSelf: false, message: msg});
-                console.log(msg);
-            })
-        }
-    }, [socket]);
-
-    useEffect(() => {
-        arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
-    }, [arrivalMessage]);
-
-    useEffect(() => {
-        scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, [messages]);
-
-    const handleSendMessage = async (msg: string, image: string) => {
-        if(currentUser) {
-            await sendMessage(currentUser._id, currentChat._id, msg, image);
-            socket.current.emit("send-msg", {
-                to: currentChat._id,
-                from: currentUser?._id,
-                message: msg,
-                image
-            })
-        }
-        setMessages((msgs) => [...msgs, { fromSelf: true, message: msg, image }]);
+  useEffect(() => {
+    const getMsg = async () => {
+      if (currentChat && currentUser) {
+        const response = await getAllMessages(currentUser._id, currentChat._id);
+        setMessages(response.data);
+      }
+      setIsLoading(false);
     };
-    return (
-        <S.Container>
-            <header>
-                <div className="userDetails">
-                    <div className="avatar">
-                        <img src={currentChat.avatarImage} alt="imagem do avatar do usuário" />
+    getMsg();
+    //
+  }, [currentChat, currentChat._id, currentUser]);
+
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on("msg-recieve", (msg: string) => {
+        setArrivalMessage({ fromSelf: false, message: msg });
+        console.log(msg);
+      });
+    }
+  }, [socket]);
+
+  useEffect(() => {
+    arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage]);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  const handleSendMessage = async (msg: string, image: string) => {
+    if (currentUser) {
+      await sendMessage(currentUser._id, currentChat._id, msg, image);
+      socket.current.emit("send-msg", {
+        to: currentChat._id,
+        from: currentUser?._id,
+        message: msg,
+        image,
+      });
+    }
+
+    setMessages((msgs) => [...msgs, { fromSelf: true, message: msg, image }]);
+  };
+
+  return (
+    <S.Container>
+      <div className="chat-header">
+        <div className="user-details">
+          <div className="avatar">
+            <img src={currentChat.avatarImage} alt="current Chat avatar" />
+          </div>
+          <div className="username">
+            <h3>{currentChat.username}</h3>
+          </div>
+        </div>
+        <Logout />
+      </div>
+      {isLoading ? (
+        <div className="loading-messages">
+          <img src={loading} alt="loader" className="loader" />
+        </div>
+      ) : (
+        <div className="chat-messages">
+          {messages.map((message) => {
+            return (
+              <div ref={scrollRef} key={uuidv4()}>
+                <div
+                  className={`message ${message.fromSelf ? "sended" : "recieved"
+                    }`}
+                >
+                  {message.message && (
+                    <div className="content ">
+                      <p>{message.message}</p>
                     </div>
-                    <div className="username">
-                        <h3>{currentChat.username}</h3>
+                  )}
+                  {message.image && (
+                    <div className="content-image">
+                      <img src={message.image} alt="sended" />
                     </div>
+                  )}
                 </div>
-                <Logout/>
-            </header>
-            {isLoading ? ( 
-                <div className="loading-messafes">
-                    <img src={loading} alt="" />
-                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+      <ChatInput handleSendMessage={handleSendMessage} />
+    </S.Container>
+  );
+};
 
-            ): ( 
-                <div className="chatMessages">
-                    {messages.map((message) => {
-                        return (
-                            <div 
-                                className={`message ${message.fromSelf ? "sent" : "received"}`}
-                            >
-                                {message.message && (
-                                    <div className="content">
-                                        <p>{message.message}</p>
-                                    </div>
-                                )}
-                                {message.image && (
-                                    <div className="contentImage">
-                                        <img src={message.image} alt="sent" />
-                                    </div>
-
-                                )}
-                            </div>
-                        )
-                    })}
-                </div>
-            )}
-            <ChatInput handleSendMessage={handleSendMessage} />
-        </S.Container>
-    )
-}
-
-export default ChatContent;
+export default  ChatContainer;

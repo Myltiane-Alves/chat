@@ -10,7 +10,8 @@ export const Container = styled.section`
   align-items: center;
   /* background-color: green; */
  
-  .content {
+  
+  .container {
     height: 100vh;
     width: 100vw;
     background-color: #00000076;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as S from './styles';
+import * as S from "./styles";
 import Picker, { EmojiClickData, Theme } from "emoji-picker-react";
 import { BsEmojiSmileFill } from "react-icons/bs";
 import { IoMdSend } from "react-icons/io";
@@ -7,7 +7,7 @@ import ImageUploading, {
   ImageListType,
   ImageType,
 } from "react-images-uploading";
-import cameraImage from "../../img/camera.png";
+import { BsCameraFill } from "react-icons/bs";
 
 interface ChatInputProps {
   handleSendMessage: (msg: string, img: string) => {};
@@ -16,7 +16,7 @@ interface ChatInputProps {
 const ChatInput: React.FC<ChatInputProps> = ({ handleSendMessage }) => {
   const [msg, setMsg] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-  const [images] = useState([]);
+  const [images] = React.useState([]);
   const handleEmojiPickerhideShow = () => {
     setShowEmojiPicker(!showEmojiPicker);
   };
@@ -49,7 +49,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ handleSendMessage }) => {
 
   return (
     <S.Container>
-      <div className="button-container">
+      <div className="btnContainer">
         <div className="emoji">
           <BsEmojiSmileFill onClick={handleEmojiPickerhideShow} />
           {showEmojiPicker && (
@@ -59,7 +59,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ handleSendMessage }) => {
           )}
         </div>
       </div>
-      <form className="input-container" onSubmit={(event) => sendChat(event)}>
+      <form className="inputContainer" onSubmit={(event) => sendChat(event)}>
         <input
           type="text"
           placeholder="type your message here"
@@ -82,11 +82,12 @@ const ChatInput: React.FC<ChatInputProps> = ({ handleSendMessage }) => {
             <div className="upload__image-wrapper">
               <button
                 style={isDragging ? { color: "red" } : undefined}
-                className="add-image-btn"
+                className="addImageBtn"
                 onClick={onImageUpload}
                 {...dragProps}
               >
-                <img src={cameraImage} alt="camera" />
+                {/* <img src={cameraImage} alt="camera" /> */}
+                <BsCameraFill />
               </button>
             </div>
           )}

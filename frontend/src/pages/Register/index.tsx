@@ -1,123 +1,128 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import * as S from "./styles";
-import { ToastContainer, ToastOptions, toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import ChatLogo from "../../assets/chat.png";
+import chatLogin from "../../assets/chat-login.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastOptions } from "react-toastify/dist/types";
 import { signUp } from "../../api";
 
-const Register = () => {
- 
-    const [values, setValues] = useState({
-        cpf: "",
-        username: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-    });
+function Register() {
+  const [values, setValues] = useState({
+    username: "",
+    email: "",
+    cpf: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  const toastOptions: ToastOptions = {
+    position: "bottom-right",
+    autoClose: 8000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "dark",
+  };
 
-    const toastOptions: ToastOptions = {
-      position: "bottom-right",
-      autoClose: 8000,
-      pauseOnHover: true,
-      draggable: true,
-      theme: "dark",
-    };
-
-    const handleSubmit = async (e: FormEvent) => {
-        e.preventDefault();
-        if(handleValidation()) {
-            const {password, email, cpf, username } = values;
-
-            const { data } = await signUp({password, email, cpf, username})
-            if(data.status === true) {
-                toast.error(data.msg, toastOptions)
-            }
-            console.log(data)
-            if(data.status === true) {
-                localStorage.setItem("chat-app-user", JSON.stringify(data.user));
-                navigate("/chat")
-            }
-        }
+  useEffect(() => {
+    if (localStorage.getItem("chat-app-user")) {
+      navigate("/");
     }
+  }, [navigate]);
 
-    const handleValidation = () => {
-        const { password, confirmPassword,  email, cpf } = values;
-        if (password !== confirmPassword) {
-          toast.error("As senhas não correspondem ", toastOptions);
-          return false;
-        } else if (cpf.length < 10) {
-            toast.error("O CPF deve conter pelo menos 11 digitos ", toastOptions);
-            return false;
-        }
-        return true;
-    };
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+    if (handleValidation()) {
+      const { password, username, email, cpf } = values;
 
-    return (
-        <S.Container>
-            <div className="register-img">
-                <img src="/img/chat-login.png" alt="" />
-            </div>
-            <form className="formArea"  onSubmit={(e) => handleSubmit(e)} >
-                <header className="brand">
-                    <img src="/img/chat2.png" alt="" />"
-                    <h1>Faça seu Cadastro</h1>
+      const { data } = await signUp({ password, username, email, cpf });
+      if (data.status === false) {
+        toast.error(data.msg, toastOptions);
+      }
+      if (data.status === true) {
+        localStorage.setItem("chat-app-user", JSON.stringify(data.user));
+        navigate("/setAvatar");
+      }
+      console.log(data);
+    }
+  };
 
-                </header>
+  const handleValidation = () => {
+    const { password, confirmPassword, username, email, cpf } = values;
+    if (password !== confirmPassword) {
+      toast.error("Passwords don't match", toastOptions);
+      return false;
+    } else if (username.length < 4) {
+      toast.error("Username should have at least 4 characters", toastOptions);
+      return false;
+    } else if (password.length > 8) {
+      toast.error("Password should have at least 8 characters", toastOptions);
+      return false;
+    } else if (email === "") {
+      toast.error("Email is required", toastOptions);
+      return false;
+    } else if (cpf === "") {
+      toast.error("CPF is required", toastOptions);
+      return false;
 
-                <div className="inputArea">
+    }
+    return true;
+  };
 
-                    <input
-                        type="text"
-                        placeholder="Digite seu Nome"
-                        name="username"
-                        onChange={(e) => setValues({...values, username: e.target.value })}          
-                    />
-                </div>
-                <div className="inputArea">
-
-                    <input
-                        type="text"
-                        placeholder="Digite seu cpf"
-                        name="cpf"
-                        onChange={(e) => setValues({...values, cpf: e.target.value })}                     
-                    />
-                </div>
-                <div className="inputArea">
-
-                    <input
-                        type="emai"
-                        placeholder="Digite seu E-mail"
-                        name="email"
-                        onChange={(e) => setValues({...values, email: e.target.value })}
-                    />
-                </div>
-                <div className="inputArea">
-                    <input
-                        type="password"
-                        placeholder="Digite sua  senha"
-                        name="password"
-                        onChange={(e) => setValues({...values, password: e.target.value })}
-                    />
-                </div>
-                <div className="inputArea">
-                    <input
-                        type="password"
-                        placeholder="Confirme sua senha"
-                        name="confirmPassword"
-                        onChange={(e) => setValues({...values, confirmPassword: e.target.value })}    
-                    />
-                </div>
-                <div className="inputArea">
-                    <button type="submit" > Salvar </button>
-                </div>
-                <span>
-                    Já tem uma conta? <a href="/login">Login</a>
-                </span>
-            </form>
-            <ToastContainer />
-        </S.Container>
-    );
+  return (
+    <>
+      <S.FormContainer>
+        <div className="login-img">
+          <img src={chatLogin} alt="ilustração de um chat" />
+        </div>
+        <form onSubmit={(event) => handleSubmit(event)}>
+          <div className="brand">
+            <img src={ChatLogo} alt="logo" />
+            <h1>chat</h1>
+          </div>
+          <input
+            type="text"
+            placeholder="Username"
+            name="username"
+            onChange={(e) => setValues({ ...values, username: e.target.value })}
+          />
+          <input
+            type="text"
+            placeholder="cpf"
+            name="username"
+            onChange={(e) => setValues({ ...values, cpf: e.target.value })}
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            name="email"
+            onChange={(e) => setValues({ ...values, email: e.target.value })}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            onChange={(e) => setValues({ ...values, password: e.target.value })}
+          />
+          <input
+            type="password"
+            placeholder="Confirm password"
+            name="confirmPassword"
+            onChange={(e) =>
+              setValues({ ...values, confirmPassword: e.target.value })
+            }
+          />
+          <button type="submit">Create User</button>
+          <span>
+            Already have an account? <Link to="/login">Login</Link>
+          </span>
+        </form>
+      </S.FormContainer>
+      <ToastContainer />
+    </>
+  );
 }
 
 export default Register;

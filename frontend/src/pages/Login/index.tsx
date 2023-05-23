@@ -1,110 +1,98 @@
-import { useNavigate } from 'react-router-dom';
-import { FormEvent, useContext, useEffect, useState } from "react";
+import { FormEvent, useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import * as S from "./styles";
-// import { useForm } from 'react-hook-form';
-import { ToastContainer, ToastOptions, toast } from "react-toastify";
+import ChatLogo from "../../assets/chat.png";
+import chatLogin from "../../assets/chat-login.png";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { login } from '../../api';
+import { ToastOptions } from "react-toastify/dist/types";
+import { login } from "../../api";
 
 
+function Login() {
+  const [values, setValues] = useState({
+    username: "",
+    password: "",
+  });
+  const navigate = useNavigate();
 
-const Login = () => {
-    // const { register, handleSubmit, formState: { errors } } = useForm();
-    // const [document, setDocument] = useState("");
-    // const [password, setPassword] = useState("");
-    const [values, setValues] = useState({
-       cpf: "",
-        password: "",
-      });
-    const navigate = useNavigate();
+  const toastOptions: ToastOptions = {
+    position: "bottom-right",
+    autoClose: 8000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "dark",
+  };
 
-    const toastOptions: ToastOptions =  {
-        position: "bottom-right",
-        autoClose: 8000,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
+  useEffect(() => {
+    if (localStorage.getItem("chat-app-user")) {
+      navigate("/");
     }
-    
-    useEffect(() => {
-        if(localStorage.getItem("chat-app-user")) {
-            navigate("/");
-        }
-    }, [navigate]);
+  }, [navigate]);
 
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+    if (handleValidation()) {
+      const { password, username } = values;
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if(handleValidation()) {
-            let { password, cpf  } = values;
-
-            try {
-                const { data } = await login({password, cpf}) 
-                if (data.status === false) {
-                    toast.error(data.msg, toastOptions);
-                  }
-                  if (data.status === true) {
-                    localStorage.setItem("chat-app-user", JSON.stringify(data.user));
-                  
-                    navigate("/");
-                  }
-
-            } catch (error) {
-                console.error(error)
-            }
-
-        }
+      const { data } = await login({ password, username });
+      if (data.status === false) {
+        toast.error(data.msg, toastOptions);
+      }
+      if (data.status === true) {
+        localStorage.setItem("chat-app-user", JSON.stringify(data.user));
+        navigate("/");
+      }
     }
+  };
 
-    const handleValidation = () => {
-        const { password, cpf} = values;
-        if(password === "") {
-            toast.error("CPF e senha são obrigatários", toastOptions)
-            return false;
-        } else if(cpf === "") {
-            toast.error("CPF e senha são obrigatários", toastOptions)
-            return false;
-        }
-        return true;
+  const handleValidation = () => {
+    const { password, username } = values;
+    if (password === "") {
+      toast.error("cpf and password are required", toastOptions);
+      return false;
+    } else if (username.length < 4) {
+      toast.error("cpf and password are required", toastOptions);
+      return false;
     }
-    
-    return (
-        <S.Container>
-            <div className="login-img">
-                <img src="/img/chat-login.png" alt="ilustração de um chat" />
-            </div>
-            <form className="formArea" onSubmit={(e) => handleSubmit(e)} >
-                <header className="brand">
-                    <img src="/img/chat2.png" alt="" />"
-                    <h1>Faça seu Login</h1>
+    return true;
+  };
 
-                </header>
+  return (
+    <>
+      <S.FormContainer>
+        <div className="login-img">
+          <img src={chatLogin} alt="ilustração de um chat" />
+        </div>
+        <form onSubmit={(event) => handleSubmit(event)}>
+          <div className="brand">
+            <img src={ChatLogo} alt="logo" />
+            <h1>chat</h1>
+          </div>
+          <input
+            type="text"
+            placeholder="username"
+            name="username"
+            onChange={(e) => setValues({ ...values, username: e.target.value })}
+            min="11"
+          />
 
-                <div className="inputArea">
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            onChange={(e) => setValues({ ...values, password: e.target.value })}
+          />
 
-                    <input
-                        type="text"
-                        placeholder='Digite seu cpf'
-                        onChange={(e) => setValues({...values,cpf: e.target.value})}
-                    />
-                </div>
-                <div className="inputArea">
-                    <input
-                        type="password"
-                        placeholder='Digite sua  senha'
-                        onChange={(e) => setValues({...values, password: e.target.value})}
-                    />
-                </div>
-                <div className="inputArea">
-                    <button type="submit" >Entrar</button>
-                </div>
-                <span>
-                    Ainda não tem uma conta? <a href="/register">Cadastra-se</a>
-                </span>
-            </form>
-            <ToastContainer />
-        </S.Container>
-    );
+          <button type="submit">Login</button>
+          <span>
+            Dont' have an account? <Link to="/register">Register</Link>
+          </span>
+        </form>
+      </S.FormContainer>
+      <ToastContainer />
+    </>
+  );
 }
 
 export default Login;

@@ -4,8 +4,8 @@ export const Container = styled.div`
   grid-template-rows: 10% 80% 10%;
   /* gap: 0.1rem; */
   overflow: hidden;
-  /* background-color: red; */
-  header {
+
+  .chat-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,8 +14,7 @@ export const Container = styled.div`
     -webkit-box-shadow: 0px 17px 20px -26px rgba(66, 68, 90, 1);
     -moz-box-shadow: 0px 17px 20px -26px rgba(66, 68, 90, 1);
     box-shadow: 0px 17px 20px -26px rgba(66, 68, 90, 1);
-    background-color: #052140;
-    .userDetails {
+    .user-details {
       display: flex;
       align-items: center;
       gap: 1rem;
@@ -48,12 +47,13 @@ export const Container = styled.div`
     }
   }
 
-  .chatMessages {
+  .chat-messages {
     padding: 1rem 2rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
     overflow: auto;
+    background-color: #092749;
     &::-webkit-scrollbar {
       width: 0.2rem;
       &-thumb {
@@ -63,9 +63,11 @@ export const Container = styled.div`
       }
     }
     .message {
-      display: flex;
+      /* display: flex; */
+      width: 100%;
       align-items: center;
       .content {
+        display: block;
         max-width: 70%;
         overflow-wrap: break-word;
         padding: 1rem;
@@ -77,7 +79,7 @@ export const Container = styled.div`
           font-size: 1.1rem;
         }
       }
-      .contentImage {
+      .content-image {
         max-width: 70%;
         /* justify-self: flex-end; */
         img {
@@ -88,21 +90,27 @@ export const Container = styled.div`
     .sended {
       justify-content: flex-end;
       .content {
-        background-color: rgb(255, 82, 161);
+        background-color: #57B5FD;
+        /* width: auto; */
+        /* height: auto; */
+        p {
+          color: #ffffff;
+        }        
       }
     }
     .recieved {
       justify-content: flex-start;
       .content {
-        background-color: rgb(0, 135, 255);
+        /* height: auto; */
+        background-color: #00152C;
       }
     }
   }
   @media screen and (max-width: 900px) and (orientation: landscape) {
     grid-template-rows: 15% 70% 15%;
 
-    header {
-      .userDetails {
+    .chat-header {
+      .user-details {
         .avatar {
           img {
             height: 2.6rem;

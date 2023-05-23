@@ -21,6 +21,6 @@ export const Container = styled.header`
     }
   }
   span {
-    color: rgb(255, 82, 161);
+    color: #57b5fd;
   }
 `;
