@@ -7,8 +7,6 @@ export const FormContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
-  /* align-items: center; */
-  /* background-color: #131324; */
   padding: 1rem;
   form {
     max-width: 500px;
@@ -34,39 +32,39 @@ export const FormContainer = styled.section`
     border-radius: 2rem;
     padding: 2rem 2rem;
  
-      input {
-        background-color: transparent;
-        padding-left: 1rem;
-        border: 0.1rem solid #092749;
-        border-radius: 0.4rem;
-        color: #BDBDBD;
-        width: 100%;
-        height: 50px;
-        max-width: 300px;
-        font-size: 1rem;
-        &:focus {
-          border: 0.1rem solid #02CCC0;
-          outline: none;
-        }
+    input {
+      background-color: transparent;
+      padding-left: 1rem;
+      border: 0.1rem solid #092749;
+      border-radius: 0.4rem;
+      color: #BDBDBD;
+      width: 100%;
+      height: 50px;
+      max-width: 300px;
+      font-size: 1rem;
+      &:focus {
+        border: 0.1rem solid #02CCC0;
+        outline: none;
       }
-      button {
-        background-color: #092749;
-        color: #BDBDBD;
-        /* padding: 1rem 2rem; */
-        border: none;
-        font-weight: bold;
-        cursor: pointer;
-        border-radius: 0.4rem;
-        font-size: 1rem;
-        text-transform: uppercase;
-        width: 100%;
-        height: 50px;
-        max-width: 300px;
-        &:hover {
-          background-color: #052140;
-          transition: all  0.5s ease-in-out;
-        }
+    }
+    button {
+      background-color: #092749;
+      color: #BDBDBD;
+      /* padding: 1rem 2rem; */
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 0.4rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      width: 100%;
+      height: 50px;
+      max-width: 300px;
+      &:hover {
+        background-color: #052140;
+        transition: all  0.5s ease-in-out;
       }
+    }
     
     span {
       color: #ffffff;

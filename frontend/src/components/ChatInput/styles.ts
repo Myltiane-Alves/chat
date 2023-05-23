@@ -62,7 +62,6 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     gap: 1rem;
-    /* background-color: #ffffff34; */
     input {
       width: 90%;
       height: 60%;

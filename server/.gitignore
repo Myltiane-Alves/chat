@@ -1,2 +1,3 @@
 # dependencia
 node_modules
+.env-local

@@ -2,7 +2,6 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: grid;
   grid-template-rows: 10% 80% 10%;
-  /* gap: 0.1rem; */
   overflow: hidden;
 
   .chat-header {
@@ -63,7 +62,6 @@ export const Container = styled.div`
       }
     }
     .message {
-      /* display: flex; */
       width: 100%;
       align-items: center;
       .content {
@@ -81,7 +79,6 @@ export const Container = styled.div`
       }
       .content-image {
         max-width: 70%;
-        /* justify-self: flex-end; */
         img {
           max-width: 300px;
         }
@@ -91,8 +88,6 @@ export const Container = styled.div`
       justify-content: flex-end;
       .content {
         background-color: #57B5FD;
-        /* width: auto; */
-        /* height: auto; */
         p {
           color: #ffffff;
         }        
@@ -101,7 +96,6 @@ export const Container = styled.div`
     .recieved {
       justify-content: flex-start;
       .content {
-        /* height: auto; */
         background-color: #00152C;
       }
     }

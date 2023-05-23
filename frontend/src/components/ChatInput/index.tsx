@@ -86,7 +86,6 @@ const ChatInput: React.FC<ChatInputProps> = ({ handleSendMessage }) => {
                 onClick={onImageUpload}
                 {...dragProps}
               >
-                {/* <img src={cameraImage} alt="camera" /> */}
                 <BsCameraFill />
               </button>
             </div>

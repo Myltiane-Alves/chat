@@ -33,33 +33,33 @@ export const FormContainer = styled.section`
     border-radius: 2rem;
     padding: 3rem 2rem;
  
-      input {
-        background-color: transparent;
-        padding: 1rem;
-        border: 0.1rem solid #092749;
-        border-radius: 0.4rem;
-        color: #BDBDBD;
-        width: 100%;
-        font-size: 1rem;
-        &:focus {
-          border: 0.1rem solid #02CCC0;
-          outline: none;
-        }
+    input {
+      background-color: transparent;
+      padding: 1rem;
+      border: 0.1rem solid #092749;
+      border-radius: 0.4rem;
+      color: #BDBDBD;
+      width: 100%;
+      font-size: 1rem;
+      &:focus {
+        border: 0.1rem solid #02CCC0;
+        outline: none;
       }
-      button {
-        background-color: #57B5FD;
-        color: #ffffff;
-        padding: 1rem 2rem;
-        border: none;
-        font-weight: bold;
-        cursor: pointer;
-        border-radius: 0.4rem;
-        font-size: 1rem;
-        text-transform: uppercase;
-        &:hover {
-          background-color: #02CCC0;
-        }
+    }
+    button {
+      background-color: #57B5FD;
+      color: #ffffff;
+      padding: 1rem 2rem;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 0.4rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      &:hover {
+        background-color: #02CCC0;
       }
+    }
     
     span {
       color: #ffffff;

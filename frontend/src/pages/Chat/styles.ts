@@ -8,8 +8,6 @@ export const Container = styled.section`
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  /* background-color: green; */
- 
   
   .container {
     height: 100vh;

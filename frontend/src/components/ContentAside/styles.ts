@@ -4,7 +4,6 @@ export const Container = styled.aside`
   display: grid;
   grid-template-rows: 10% 80% 10%;
   overflow: hidden;
-  /* background-color: red; */
   background-color: #00152C;
   .brand {
     display: flex;
@@ -44,7 +43,6 @@ export const Container = styled.aside`
       background-color: #57B5FD;
       min-height: 5rem;
       cursor: pointer;
-      /* border-radius: 0.5rem; */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -67,7 +65,6 @@ export const Container = styled.aside`
       }
     }
     .selected {
-      /* background-color: #9a86f3; */
       background-color: rgba(45, 136, 255, 0.1);
     }
     @media screen and (min-width: 720px) {
@@ -86,9 +83,7 @@ export const Container = styled.aside`
       }
     }
   }
-  .current-user {
-    /* background-color: #2E333D; */
-    
+  .current-user {    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -98,7 +93,6 @@ export const Container = styled.aside`
       position: relative;
       img {
         height: 3.1rem;
-        /* max-inline-size: 100%; */
       }
       .camera-img {
         position: absolute;
